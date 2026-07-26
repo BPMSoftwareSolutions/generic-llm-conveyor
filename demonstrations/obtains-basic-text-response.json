@@ -1,0 +1,41 @@
+{
+  "$schema": "../authority/model-request.schema.v1.json",
+  "requestId": "explain-execution-result-001",
+  "providerAuthorityId": "primary-cognitive-provider",
+  "modelAlias": "instruction-capable-model",
+  "interaction": {
+    "mode": "text-generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Explain only what is supported by the supplied execution evidence."
+      },
+      {
+        "role": "user",
+        "content": "Explain this execution receipt."
+      }
+    ]
+  },
+  "responsePolicy": {
+    "format": "text",
+    "maximumOutputTokens": 1200,
+    "temperature": 0.1
+  },
+  "executionPolicy": {
+    "timeoutMilliseconds": 60000,
+    "attemptAuthority": {
+      "maximumAuthorizedAttempts": 1
+    },
+    "providerSubstitution": {
+      "allowed": false
+    }
+  },
+  "evidencePolicy": {
+    "captureRequestHash": true,
+    "captureResponseHash": true,
+    "captureResolvedProvider": true,
+    "captureResolvedModel": true,
+    "captureTokenUsage": true,
+    "captureTiming": true
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./authority/model-request.schema.v1.json",
+  "title": "Model Request",
+  "description": "A provider-neutral request for one model response. Contains no API keys, base URLs, SDK message objects, provider-specific fields, fallback sequences, or runtime environment details.",
+  "type": "object",
+  "required": [
+    "requestId",
+    "providerAuthorityId",
+    "modelAlias",
+    "interaction",
+    "responsePolicy",
+    "executionPolicy",
+    "evidencePolicy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "providerAuthorityId": { "type": "string", "minLength": 1 },
+    "modelAlias": { "type": "string", "minLength": 1 },
+    "interaction": {
+      "type": "object",
+      "required": ["mode", "messages"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": ["text-generation", "structured-generation"]
+        },
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["role", "content"],
+            "additionalProperties": false,
+            "properties": {
+              "role": { "enum": ["system", "user", "assistant"] },
+              "content": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "responsePolicy": {
+      "type": "object",
+      "required": ["format", "maximumOutputTokens"],
+      "additionalProperties": false,
+      "properties": {
+        "format": { "enum": ["text", "json"] },
+        "maximumOutputTokens": { "type": "integer", "minimum": 1 },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "schema": {
+          "type": "object",
+          "description": "Required when format is \"json\". The declared shape the response must satisfy."
+        }
+      },
+      "if": { "properties": { "format": { "const": "json" } } },
+      "then": { "required": ["format", "maximumOutputTokens", "schema"] }
+    },
+    "executionPolicy": {
+      "type": "object",
+      "required": [
+        "timeoutMilliseconds",
+        "attemptAuthority",
+        "providerSubstitution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "timeoutMilliseconds": { "type": "integer", "minimum": 1 },
+        "attemptAuthority": {
+          "type": "object",
+          "required": ["maximumAuthorizedAttempts"],
+          "additionalProperties": false,
+          "properties": {
+            "maximumAuthorizedAttempts": { "type": "integer", "minimum": 1 },
+            "continuationRule": {
+              "const": "continue-while-provider-reports-transient-failure",
+              "description": "Required to authorize more than one attempt. Without it, repeating an attempt would be a hidden retry."
+            }
+          }
+        },
+        "providerSubstitution": {
+          "type": "object",
+          "required": ["allowed"],
+          "additionalProperties": false,
+          "properties": {
+            "allowed": { "type": "boolean" },
+            "continueWhen": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "evidencePolicy": {
+      "type": "object",
+      "required": [
+        "captureRequestHash",
+        "captureResponseHash",
+        "captureResolvedProvider",
+        "captureResolvedModel",
+        "captureTokenUsage",
+        "captureTiming"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "captureRequestHash": { "type": "boolean" },
+        "captureResponseHash": { "type": "boolean" },
+        "captureResolvedProvider": { "type": "boolean" },
+        "captureResolvedModel": { "type": "boolean" },
+        "captureTokenUsage": { "type": "boolean" },
+        "captureTiming": { "type": "boolean" }
+      }
+    }
+  }
+}

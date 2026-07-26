@@ -1,0 +1,37 @@
+{
+  "$schema": "../authority/model-request.schema.v1.json",
+  "requestId": "rejects-unknown-provider-001",
+  "providerAuthorityId": "provider-authority-that-was-never-declared",
+  "modelAlias": "instruction-capable-model",
+  "interaction": {
+    "mode": "text-generation",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Explain this execution receipt."
+      }
+    ]
+  },
+  "responsePolicy": {
+    "format": "text",
+    "maximumOutputTokens": 512,
+    "temperature": 0
+  },
+  "executionPolicy": {
+    "timeoutMilliseconds": 30000,
+    "attemptAuthority": {
+      "maximumAuthorizedAttempts": 1
+    },
+    "providerSubstitution": {
+      "allowed": false
+    }
+  },
+  "evidencePolicy": {
+    "captureRequestHash": true,
+    "captureResponseHash": true,
+    "captureResolvedProvider": true,
+    "captureResolvedModel": true,
+    "captureTokenUsage": true,
+    "captureTiming": true
+  }
+}

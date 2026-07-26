@@ -1,0 +1,126 @@
+{
+  "$schema": "./generic-llm-connector.sej.v1.json",
+  "semanticExecutionJournalVersion": "1.0",
+  "capabilityId": "obtains-model-response",
+  "capabilityName": "Generic LLM Connector",
+  "version": "0.1.0",
+  "canonicalIntent": "Obtain one normalized model response under an explicitly resolved provider, model, request, execution policy, and evidence policy.",
+  "canonicalOperation": "obtainsModelResponse(request, executionPolicy)",
+
+  "owns": [
+    "validates the provider-neutral request",
+    "resolves declared provider authority",
+    "resolves a model alias to a concrete model",
+    "validates the requested interaction mode",
+    "constructs one immutable invocation context",
+    "delegates protocol mechanics to one provider adapter",
+    "records each authorized provider attempt",
+    "normalizes the provider response",
+    "classifies deterministic failures",
+    "returns result testimony and an execution receipt"
+  ],
+
+  "doesNotOwn": [
+    "prompt authoring",
+    "business reasoning",
+    "capability selection",
+    "agent planning",
+    "conversation memory",
+    "semantic retrieval",
+    "tool selection",
+    "file-system operations",
+    "provider credential storage",
+    "silent model substitution",
+    "implicit fallback",
+    "hidden retry loops",
+    "response interpretation",
+    "domain-specific output validation"
+  ],
+
+  "components": [
+    {
+      "componentId": "validates-model-request",
+      "responsibility": "rejects malformed or unsupported requests",
+      "implementation": "src/obtains-model-response/validates-model-request.ts"
+    },
+    {
+      "componentId": "resolves-provider-authority",
+      "responsibility": "chooses the declared provider configuration",
+      "implementation": "src/obtains-model-response/resolves-provider-authority.ts"
+    },
+    {
+      "componentId": "resolves-model-alias",
+      "responsibility": "maps a semantic alias to a concrete provider model",
+      "implementation": "src/obtains-model-response/resolves-model-alias.ts"
+    },
+    {
+      "componentId": "prepares-model-invocation",
+      "responsibility": "creates one immutable invocation context",
+      "implementation": "src/obtains-model-response/prepares-model-invocation-context.ts"
+    },
+    {
+      "componentId": "invokes-provider-adapter",
+      "responsibility": "performs exactly one invocation per authorized attempt",
+      "implementation": "src/obtains-model-response/invokes-provider-adapter.ts"
+    },
+    {
+      "componentId": "records-provider-testimony",
+      "responsibility": "captures observed provider and model facts",
+      "implementation": "src/obtains-model-response/records-provider-testimony.ts"
+    },
+    {
+      "componentId": "normalizes-model-response",
+      "responsibility": "converts protocol output to the canonical response",
+      "implementation": "src/obtains-model-response/normalizes-model-response.ts"
+    },
+    {
+      "componentId": "classifies-model-invocation-failure",
+      "responsibility": "maps provider errors into stable failure categories",
+      "implementation": "src/obtains-model-response/classifies-model-invocation-failure.ts"
+    },
+    {
+      "componentId": "returns-model-execution-receipt",
+      "responsibility": "returns result, observations, hashes, and disposition",
+      "implementation": "src/obtains-model-response/returns-model-execution-receipt.ts"
+    }
+  ],
+
+  "contracts": {
+    "request": "./model-request.schema.v1.json",
+    "providerAuthority": "./provider-authority.schema.v1.json",
+    "response": "./model-response.schema.v1.json",
+    "executionReceipt": "./model-execution-receipt.schema.v1.json",
+    "featureBody": "./feature-body.contract.v1.json"
+  },
+
+  "acceptanceAuthority": "../acceptance/obtains-model-response.feature",
+
+  "dispositions": [
+    { "code": "MODEL_RESPONSE_OBTAINED", "exitCode": 0 },
+    { "code": "MODEL_REQUEST_REJECTED", "exitCode": 10 },
+    { "code": "PROVIDER_AUTHORITY_NOT_FOUND", "exitCode": 11 },
+    { "code": "MODEL_ALIAS_NOT_FOUND", "exitCode": 12 },
+    { "code": "INTERACTION_MODE_NOT_SUPPORTED", "exitCode": 13 },
+    { "code": "PROVIDER_AUTHENTICATION_FAILED", "exitCode": 20 },
+    { "code": "PROVIDER_UNAVAILABLE", "exitCode": 21 },
+    { "code": "PROVIDER_TIMED_OUT", "exitCode": 22 },
+    { "code": "PROVIDER_REQUEST_REJECTED", "exitCode": 23 },
+    { "code": "RESPONSE_FORMAT_NOT_SATISFIED", "exitCode": 30 },
+    { "code": "ATTEMPT_AUTHORITY_EXHAUSTED", "exitCode": 31 },
+    { "code": "EXECUTION_CANCELLED", "exitCode": 40 },
+    { "code": "INTERNAL_EXECUTION_FAILED", "exitCode": 50 }
+  ],
+
+  "providerAdapters": [
+    {
+      "adapterId": "invokes-gemini-model",
+      "providerKind": "gemini",
+      "status": "implemented",
+      "implementation": "providers/gemini/invokes-gemini-model.ts"
+    },
+    { "adapterId": "invokes-openai-model", "providerKind": "openai", "status": "deferred" },
+    { "adapterId": "invokes-anthropic-model", "providerKind": "anthropic", "status": "deferred" },
+    { "adapterId": "invokes-litellm-model", "providerKind": "litellm", "status": "deferred" },
+    { "adapterId": "invokes-llamacpp-model", "providerKind": "llamacpp", "status": "deferred" }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./authority/model-execution-receipt.schema.v1.json",
+  "title": "Model Execution Receipt",
+  "description": "Proof of one governed model execution: hashes, attempt count, and timing.",
+  "type": "object",
+  "required": [
+    "attemptCount",
+    "startedAt",
+    "completedAt",
+    "durationMilliseconds"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "requestHash": { "$ref": "#/$defs/sha256" },
+    "responseHash": { "$ref": "#/$defs/sha256" },
+    "attemptCount": { "type": "integer", "minimum": 0 },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "completedAt": { "type": "string", "format": "date-time" },
+    "durationMilliseconds": { "type": "number", "minimum": 0 }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "disposition": {
+      "description": "The stable disposition vocabulary. Downstream consumers decide on these, never on provider-specific error codes.",
+      "enum": [
+        "MODEL_RESPONSE_OBTAINED",
+        "MODEL_REQUEST_REJECTED",
+        "PROVIDER_AUTHORITY_NOT_FOUND",
+        "MODEL_ALIAS_NOT_FOUND",
+        "INTERACTION_MODE_NOT_SUPPORTED",
+        "PROVIDER_AUTHENTICATION_FAILED",
+        "PROVIDER_UNAVAILABLE",
+        "PROVIDER_TIMED_OUT",
+        "PROVIDER_REQUEST_REJECTED",
+        "RESPONSE_FORMAT_NOT_SATISFIED",
+        "ATTEMPT_AUTHORITY_EXHAUSTED",
+        "EXECUTION_CANCELLED",
+        "INTERNAL_EXECUTION_FAILED"
+      ]
+    },
+    "providerDisposition": {
+      "enum": [
+        "provider-responded",
+        "provider-rejected-request",
+        "provider-timed-out",
+        "provider-unavailable",
+        "provider-authentication-failed"
+      ]
+    },
+    "attemptTestimony": {
+      "type": "object",
+      "required": [
+        "attemptNumber",
+        "invocationId",
+        "disposition",
+        "startedAt",
+        "completedAt",
+        "durationMilliseconds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "attemptNumber": { "type": "integer", "minimum": 1 },
+        "invocationId": { "type": "string" },
+        "disposition": { "$ref": "#/$defs/providerDisposition" },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "durationMilliseconds": { "type": "number", "minimum": 0 },
+        "providerFailure": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "providerCode": { "type": "string" },
+            "providerMessage": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

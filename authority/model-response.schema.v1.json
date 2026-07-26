@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./authority/model-response.schema.v1.json",
+  "title": "Model Response",
+  "description": "The normalized capability result. Every response carries a proof receipt, whether or not a provider was reached.",
+  "type": "object",
+  "required": ["requestId", "disposition", "proof"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "requestId": { "type": "string", "minLength": 1 },
+    "invocationId": { "type": "string", "minLength": 1 },
+    "disposition": {
+      "$ref": "./model-execution-receipt.schema.v1.json#/$defs/disposition"
+    },
+    "resolvedAuthority": {
+      "type": "object",
+      "required": ["providerAuthorityId", "modelAlias"],
+      "additionalProperties": false,
+      "properties": {
+        "providerAuthorityId": { "type": "string" },
+        "providerKind": {
+          "enum": ["gemini", "openai", "anthropic", "litellm", "llamacpp"]
+        },
+        "modelAlias": { "type": "string" },
+        "resolvedModel": { "type": "string" }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": ["format"],
+      "additionalProperties": false,
+      "properties": {
+        "format": { "enum": ["text", "json"] },
+        "text": { "type": "string" },
+        "structuredValue": {},
+        "finishReason": { "type": "string" }
+      }
+    },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inputTokens": { "type": "integer", "minimum": 0 },
+        "outputTokens": { "type": "integer", "minimum": 0 },
+        "totalTokens": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "detail"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string" },
+          "detail": { "type": "string" },
+          "pointer": { "type": "string" }
+        }
+      }
+    },
+    "attempts": {
+      "type": "array",
+      "description": "One entry per authorized provider attempt actually performed.",
+      "items": {
+        "$ref": "./model-execution-receipt.schema.v1.json#/$defs/attemptTestimony"
+      }
+    },
+    "proof": {
+      "$ref": "./model-execution-receipt.schema.v1.json"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "../authority/model-request.schema.v1.json",
+  "requestId": "records-provider-unavailability-001",
+  "providerAuthorityId": "primary-cognitive-provider",
+  "modelAlias": "instruction-capable-model",
+  "interaction": {
+    "mode": "text-generation",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Summarize the observed execution failure."
+      }
+    ]
+  },
+  "responsePolicy": {
+    "format": "text",
+    "maximumOutputTokens": 512,
+    "temperature": 0
+  },
+  "executionPolicy": {
+    "timeoutMilliseconds": 15000,
+    "attemptAuthority": {
+      "maximumAuthorizedAttempts": 2,
+      "continuationRule": "continue-while-provider-reports-transient-failure"
+    },
+    "providerSubstitution": {
+      "allowed": false
+    }
+  },
+  "evidencePolicy": {
+    "captureRequestHash": true,
+    "captureResponseHash": true,
+    "captureResolvedProvider": true,
+    "captureResolvedModel": true,
+    "captureTokenUsage": true,
+    "captureTiming": true
+  }
+}

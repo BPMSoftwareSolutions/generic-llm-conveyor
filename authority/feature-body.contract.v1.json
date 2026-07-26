@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./authority/feature-body.contract.v1.json",
+  "title": "Feature Body Contract",
+  "description": "Structural invariants the capability package must satisfy. Scenario folders own their implementation; files express verbs.",
+  "type": "object",
+  "required": ["capabilityId", "invariants", "boundaries"],
+  "properties": {
+    "capabilityId": { "const": "obtains-model-response" },
+
+    "invariants": {
+      "type": "array",
+      "description": "Enforced by tests/conformance/enforces-connector-conformance.test.ts.",
+      "items": { "type": "object" },
+      "default": [
+        {
+          "invariantId": "enforces-exactly-one-adapter-invocation",
+          "statement": "The adapter is invoked exactly once per authorized attempt, and never more than maximumAuthorizedAttempts times.",
+          "provenBy": "Conformance: enforces exactly one adapter invocation"
+        },
+        {
+          "invariantId": "prevents-provider-substitution",
+          "statement": "No adapter outside the declared provider authority is ever invoked.",
+          "provenBy": "Conformance: prevents provider substitution"
+        },
+        {
+          "invariantId": "preserves-provider-testimony",
+          "statement": "Original provider errors survive alongside the canonical disposition, and every attempt is recorded.",
+          "provenBy": "Conformance: preserves provider testimony"
+        },
+        {
+          "invariantId": "produces-byte-stable-failure-dispositions",
+          "statement": "Replaying the same invalid input produces byte-identical findings, and the same semantic request hashes identically.",
+          "provenBy": "Conformance: produces byte-stable failure dispositions"
+        },
+        {
+          "invariantId": "every-exit-carries-proof",
+          "statement": "No path returns a result without an execution receipt.",
+          "provenBy": "Conformance: every exit carries proof"
+        }
+      ]
+    },
+
+    "boundaries": {
+      "type": "object",
+      "description": "What may cross which edge.",
+      "default": {
+        "connectorMayNotImport": [
+          "provider SDK packages",
+          "transport libraries",
+          "process environment access"
+        ],
+        "adapterMayNotExport": [
+          "provider wire types",
+          "provider request bodies",
+          "provider response payloads"
+        ],
+        "adapterReceives": "ModelInvocationContext only",
+        "adapterReturns": "ProviderInvocationTestimony only",
+        "credentialsCrossAs": "credentialReference (name), never a value"
+      }
+    },
+
+    "namingDoctrine": {
+      "type": "object",
+      "default": {
+        "files": "express verbs in kebab-case (validates-model-request.ts)",
+        "functions": "third-person singular (validatesModelRequest)",
+        "capabilityIds": "verb-first kebab-case (obtains-model-response)",
+        "dispositions": "SCREAMING_SNAKE_CASE, stable vocabulary only"
+      }
+    },
+
+    "cliDiscipline": {
+      "type": "object",
+      "default": {
+        "stdout": "canonical model response JSON",
+        "stderr": "JSONL progress and execution testimony",
+        "exit": "stable disposition code",
+        "mustNot": [
+          "resolve providers",
+          "invoke SDKs",
+          "retry calls",
+          "normalize responses"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "../authority/model-request.schema.v1.json",
+  "requestId": "obtains-structured-response-001",
+  "providerAuthorityId": "primary-cognitive-provider",
+  "modelAlias": "instruction-capable-model",
+  "interaction": {
+    "mode": "structured-generation",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Respond only with the declared JSON shape."
+      },
+      {
+        "role": "user",
+        "content": "Classify this execution receipt."
+      }
+    ]
+  },
+  "responsePolicy": {
+    "format": "json",
+    "maximumOutputTokens": 512,
+    "temperature": 0,
+    "schema": {
+      "type": "object",
+      "required": ["classification", "confidence"],
+      "properties": {
+        "classification": { "type": "string" },
+        "confidence": { "type": "number" }
+      }
+    }
+  },
+  "executionPolicy": {
+    "timeoutMilliseconds": 30000,
+    "attemptAuthority": {
+      "maximumAuthorizedAttempts": 1
+    },
+    "providerSubstitution": {
+      "allowed": false
+    }
+  },
+  "evidencePolicy": {
+    "captureRequestHash": true,
+    "captureResponseHash": true,
+    "captureResolvedProvider": true,
+    "captureResolvedModel": true,
+    "captureTokenUsage": true,
+    "captureTiming": true
+  }
+}

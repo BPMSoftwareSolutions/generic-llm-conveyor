@@ -1,0 +1,24 @@
+{
+  "$schema": "../authority/provider-authority.schema.v1.json",
+  "providerAuthorityId": "primary-cognitive-provider",
+  "providerKind": "gemini",
+  "adapterId": "invokes-gemini-model",
+  "credentialReference": {
+    "source": "environment",
+    "name": "GEMINI_API_KEY"
+  },
+  "endpointAuthority": {
+    "mode": "provider-default"
+  },
+  "modelAliases": {
+    "instruction-capable-model": {
+      "resolvedModel": "gemini-flash-latest",
+      "supportedInteractionModes": ["text-generation", "structured-generation"]
+    }
+  },
+  "capabilities": {
+    "supportsUsageReporting": true,
+    "supportsStructuredOutput": true,
+    "supportsStreaming": false
+  }
+}
