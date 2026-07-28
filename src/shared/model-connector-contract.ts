@@ -262,6 +262,7 @@ export type AttemptTestimony = Readonly<{
   attemptNumber: number;
   invocationId: string;
   disposition: ProviderDisposition;
+  providerRequestId?: string;
   startedAt: string;
   completedAt: string;
   durationMilliseconds: number;

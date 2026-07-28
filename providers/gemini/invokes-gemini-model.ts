@@ -17,6 +17,10 @@ import {
 } from "./maps-gemini-testimony.js";
 
 export const GEMINI_ADAPTER_ID = "invokes-gemini-model";
+export const GEMINI_ADAPTER_EXECUTABLE_SHA256 =
+  `sha256:${createHash("sha256")
+    .update(await readFile(new URL(import.meta.url)))
+    .digest("hex")}`;
 
 /** Injected transport, so the adapter contract is provable without network. */
 export type HttpPort = (
@@ -154,3 +158,5 @@ function parsesJson(bodyText: string): unknown {
     return { error: { status: "UNPARSEABLE_RESPONSE", message: bodyText } };
   }
 }
+import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";

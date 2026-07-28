@@ -17,6 +17,7 @@ export function recordsProviderTestimony(
     attemptNumber,
     invocationId: testimony.invocationId,
     disposition: testimony.disposition,
+    providerRequestId: testimony.observation.providerRequestId,
     startedAt: testimony.observation.startedAt,
     completedAt: testimony.observation.completedAt,
     durationMilliseconds: testimony.observation.durationMilliseconds,
