@@ -1,0 +1,23 @@
+{
+  "artifactType": "responsibility-authority",
+  "featureId": "greet-student",
+  "scenarioId": "greet-a-student-by-name",
+  "obligationId": "return-one-personalized-greeting",
+  "responsibilityId": "resolves-student-greeting",
+  "responsibility": "Resolves student greeting.",
+  "provenance": {
+    "requestHash": "sha256:4a9f0aa862f8612c71e99aacb473064a9750798e70d617c5d0a96cc17fbff2c1",
+    "responseHash": "sha256:554ae6076fbe4f0c09391b205a16136ab29869268df1e0f41173d4bcadad4b4c",
+    "invocationId": "invocation-4d52a149-2751-4585-997b-da40685d85ea",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:32c1fc8849dd2967bd671c195a2c12bf9daf1e815348d7789d66f7649a2915ac",
+    "signature": "x6x1007ujaPvd4blgNrSIVLIPV07l60Il3nTRDvUDFK4AmXgBaEKMIqEYV84O09wxjcszDzeOcuG3Ch+WiXFBw=="
+  }
+}

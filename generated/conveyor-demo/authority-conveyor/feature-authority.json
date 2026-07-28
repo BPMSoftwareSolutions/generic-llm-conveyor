@@ -1,0 +1,21 @@
+{
+  "artifactType": "feature-authority",
+  "featureId": "greet-student",
+  "need": "A student asks to be greeted by name.",
+  "promise": "Return one personalized greeting signal.",
+  "provenance": {
+    "requestHash": "sha256:63d56989764dde6bcbd59fd4f8c5bbb860cbc5d0fa9fb9e0d751b14dca9b74b8",
+    "responseHash": "sha256:4650149b9329b6b37cadc1ab3bfefb41e42fa62d07248a13b7499a36360811a9",
+    "invocationId": "invocation-9903673c-b52a-4c0b-b655-743b3063c488",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:6de30743a9424c821447c99988fbf1dc1ad10e1e9b3e755e3ce7e920685230f9",
+    "signature": "GEr+jjS5lphYp61nN4A79/aJ2zrxkKNEY9Pz3juKQyIl91TRHhTYneClrlRg1qg6eGcdphsWFSP8iOqVYm1fAA=="
+  }
+}

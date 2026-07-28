@@ -1,0 +1,25 @@
+{
+  "artifactType": "semantic-execution-authority",
+  "featureId": "greet-student",
+  "scenarioId": "greet-a-student-by-name",
+  "obligationId": "return-one-personalized-greeting",
+  "responsibilityId": "resolves-student-greeting",
+  "signalId": "student-greeting",
+  "semanticOperationId": "resolve-student-greeting",
+  "evaluationRule": "The execution is evaluated as satisfied when the student greeting is successfully resolved and returned as a personalized greeting signal.",
+  "provenance": {
+    "requestHash": "sha256:88eedf0d888385d937fbec316be0463fb0f00f440186748191ca01951a364f32",
+    "responseHash": "sha256:6c922c75b7abac47edc1c6d1e02f66b5a9c9cf9e33cbfc9cb909020f7418791d",
+    "invocationId": "invocation-e4a0d65f-c8dc-4f70-896e-11254829dfe5",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:c41b3ca65c13b457b8c1a3a3a4de0fb693f2ad840d98a1e32e4df01459366b63",
+    "signature": "9ayWvRnqgF5WqM50fddhOf6yFxDb85stQgp3wOzMm7fVLssynW0c5hlsoAssDYqF7FWSOLml+A8KV0rxQjMwBA=="
+  }
+}

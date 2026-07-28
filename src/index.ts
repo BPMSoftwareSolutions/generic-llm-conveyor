@@ -39,3 +39,14 @@ export {
   GEMINI_ADAPTER_ID,
   type HttpPort,
 } from "../providers/gemini/invokes-gemini-model.js";
+
+export * from "./conveyor/conveyor-contract.js";
+export { runsAuthorityConveyor } from "./conveyor/runs-authority-conveyor.js";
+export {
+  initializesConveyorIdentity,
+  signsAuthorityArtifact,
+  signsMarkdownProjection,
+  verifiesAuthorityArtifact,
+  verifiesMarkdownProjection
+} from "./conveyor/signs-authority-artifact.js";
+export { projectsConveyorDocument } from "./conveyor/projects-conveyor-document.js";

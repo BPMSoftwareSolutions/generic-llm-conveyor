@@ -9,6 +9,59 @@ it obtains a model response under declared authority, and proves what it did.
 
 Capability ID: `obtains-model-response` · Version `0.1.0`
 
+## Authority conveyor
+
+The repository now includes one complete eight-lane authority conveyor. Gemini
+may submit only schema-bound authority; it never submits TypeScript text. Every
+accepted JSON artifact embeds its request/response provenance and carries an
+Ed25519 conveyor signature. A RED lane persists no authority and prevents every
+downstream lane from running.
+
+The final lane submits the declarative request consumed by the sibling
+`declarative-typescript-body-projector`. The conveyor contains no TypeScript
+renderer and never writes a `.ts` target. The projector performs both
+embodiment passes:
+
+```text
+Signed LLM body authority
+        ↓ artifact hash
+Semantic AST projector
+        ↓ byte-conformance gate
+Lossless compiler-AST authority
+        ↓ signed projector
+Generated TypeScript body
+```
+
+The generated body is its own receipt. Its signed header binds the exact body
+bytes to the exact compiler-AST authority, and its `projection-id` contains the
+hash of the signed LLM body authority that initiated projection. No detached
+projection-receipt JSON is created.
+
+Every completed run also projects a signed Markdown index at
+[`generated/conveyor-demo/CONVEYOR-GENERATED-BODIES.md`](generated/conveyor-demo/CONVEYOR-GENERATED-BODIES.md).
+It links all eight signed LLM authority bodies, the compiler AST authority, and
+the generated TypeScript body, and displays the live invocation IDs,
+request/response hashes, admission signatures, and final projector signature.
+The index is a navigational projection; the linked artifacts remain the
+evidence.
+
+Run the live classroom demonstration:
+
+```bash
+# Uses LOC_GEMINI_API_KEY from the Windows process environment.
+npm run conveyor:demo
+
+# Resume only artifacts whose existing conveyor signatures still verify.
+npm run conveyor:resume
+
+# Prove model artifacts, projector-only code origin, tamper rejection,
+# authority-drift rejection, and execution of the projected body.
+npm run test:conveyor
+```
+
+The governing boundary is declared in
+[`authority/authority-conveyor.contract.v1.json`](authority/authority-conveyor.contract.v1.json).
+
 ## Quick start
 
 ```bash
@@ -18,7 +71,7 @@ npm install
 npm test
 
 # Obtain a response through the CLI front door
-export GEMINI_API_KEY=...
+$env:LOC_GEMINI_API_KEY="..."
 npm run obtain -- \
   --request ./demonstrations/obtains-basic-text-response.json \
   --provider-authority ./config/provider-authority.json

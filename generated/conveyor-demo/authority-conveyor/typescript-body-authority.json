@@ -1,0 +1,48 @@
+{
+  "artifactType": "typescript-body-authority",
+  "projectorRequest": {
+    "contract": {
+      "schemaId": "https://schemas.deterministic.solutions/projection/semantic-invocation-function-request/1.0.0/schema.json",
+      "schemaVersion": "1.0.0",
+      "schemaDigest": "sha256:923b757154a0b858f9cc418d4d270993aa7e3a68b4acce81aac0f5cfab6b31bd"
+    },
+    "projectionId": "project-greets-student-body",
+    "targetLanguage": "typescript",
+    "artifact": {
+      "relativePath": "capabilities/greet-student/greets-student.ts"
+    },
+    "lineage": {
+      "featureId": "greet-student",
+      "scenarioId": "greet-a-student-by-name",
+      "obligationId": "return-one-personalized-greeting",
+      "responsibilityId": "resolves-student-greeting",
+      "signalId": "student-greeting"
+    },
+    "function": {
+      "identity": "resolves-student-greeting",
+      "name": "greetsStudent",
+      "contextParameter": {
+        "name": "context",
+        "typeReference": "GreetsStudentContext"
+      },
+      "resultTypeReference": "StudentGreetingSignal",
+      "semanticEdgeId": "resolve-student-greeting",
+      "awaited": true
+    }
+  },
+  "provenance": {
+    "requestHash": "sha256:bac4ff4579fb303669644948da44f513add5e7962b7630db5baac72f70f061c3",
+    "responseHash": "sha256:bea0d2f38434902f16b1cbe93609ea284c30e10a24462ba86f4abb33a5904eee",
+    "invocationId": "invocation-7f5cc0f3-19b6-491f-8ea3-6822f007ee86",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:916b23577d99cdb00dca915f994898f535df11ba50514eb3c083098625447468",
+    "signature": "D9nzKV/iUe4Gu16RAiyJ5RMPhAIKs4NHdXUbm6+aNoWCWCy7XxsSasdV9H82oR8Sq/7m+2OkZ0HkIRhp/SUlAw=="
+  }
+}

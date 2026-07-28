@@ -1,0 +1,20 @@
+{
+  "intentId": "project-greeting-capability",
+  "statement": "When a student asks to be greeted by name, return one personalized greeting signal.",
+  "identities": {
+    "featureId": "greet-student",
+    "scenarioId": "greet-a-student-by-name",
+    "obligationId": "return-one-personalized-greeting",
+    "responsibilityId": "resolves-student-greeting",
+    "signalId": "student-greeting",
+    "semanticOperationId": "resolve-student-greeting",
+    "projectionId": "project-greets-student-body"
+  },
+  "body": {
+    "functionName": "greetsStudent",
+    "parameterName": "context",
+    "contextType": "GreetsStudentContext",
+    "resultType": "StudentGreetingSignal",
+    "artifactPath": "capabilities/greet-student/greets-student.ts"
+  }
+}

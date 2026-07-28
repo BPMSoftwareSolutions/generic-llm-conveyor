@@ -1,0 +1,50 @@
+{
+  "contractType": "authority-conveyor-contract.v1",
+  "capabilityId": "projects-authority-to-executable-body",
+  "lanes": [
+    "feature-authority",
+    "scenario-authority",
+    "obligation-authority",
+    "responsibility-authority",
+    "signal-authority",
+    "semantic-execution-authority",
+    "semantic-ast-authority",
+    "typescript-body-authority"
+  ],
+  "codeEmbodimentBoundary": {
+    "owner": "declarative-typescript-body-projector",
+    "conveyorMustNot": [
+      "import-the-typescript-compiler",
+      "construct-typescript-tokens",
+      "construct-typescript-ast-nodes",
+      "contain-typescript-source-templates",
+      "write-typescript-target-files",
+      "accept-code-text-from-a-model"
+    ],
+    "modelMaySubmit": "schema-bound semantic TypeScript projection authority only",
+    "projectorMust": [
+      "construct-the-language-ast",
+      "print-the-source",
+      "write-the-typescript-target",
+      "embed-projector-identity",
+      "embed-projector-key-identity",
+      "embed-authority-hash",
+      "embed-body-hash",
+      "embed-projection-signature"
+    ]
+  },
+  "provenanceChain": [
+    "model-response-hash-is-embedded-in-the-admitted-lane-artifact",
+    "admitted-lane-artifact-is-signed-by-the-conveyor",
+    "signed-body-authority-hash-is-embedded-in-the-projection-id",
+    "semantic-projector-output-is-byte-checked-before-ast-adoption",
+    "lossless-ast-authority-is-projected-by-the-projector",
+    "projector-signature-binds-the-ast-authority-hash-and-body-hash"
+  ],
+  "failurePolicy": {
+    "laneRedStopsDownstream": true,
+    "rejectedSubmissionIsNotPersistedAsAuthority": true,
+    "detachedProjectionReceipts": false,
+    "artifactIsItsOwnEvidence": true
+  }
+}

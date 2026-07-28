@@ -1,0 +1,11 @@
+{
+  "authorityType": "trusted-projector-keys.v1",
+  "keys": [
+    {
+      "projectorId": "declarative-typescript-body-projector",
+      "keyId": "sha256:8f219860f51d00d4e1c9bf679a6a5614a7f85ab2a60a85da4fbe91ed234bec38",
+      "algorithm": "ed25519",
+      "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAlqrYdvHTiMQ49UCImyBnw/dYIpPCXYLYAQ16R4TCsDQ=\n-----END PUBLIC KEY-----\n"
+    }
+  ]
+}

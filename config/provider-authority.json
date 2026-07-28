@@ -5,7 +5,7 @@
   "adapterId": "invokes-gemini-model",
   "credentialReference": {
     "source": "environment",
-    "name": "GEMINI_API_KEY"
+    "name": "LOC_GEMINI_API_KEY"
   },
   "endpointAuthority": {
     "mode": "provider-default"

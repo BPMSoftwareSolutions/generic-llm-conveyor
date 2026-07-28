@@ -1,0 +1,29 @@
+{
+  "artifactType": "semantic-ast-authority",
+  "featureId": "greet-student",
+  "scenarioId": "greet-a-student-by-name",
+  "obligationId": "return-one-personalized-greeting",
+  "responsibilityId": "resolves-student-greeting",
+  "signalId": "student-greeting",
+  "semanticOperationId": "resolve-student-greeting",
+  "functionName": "greetsStudent",
+  "parameterName": "context",
+  "contextType": "GreetsStudentContext",
+  "resultType": "StudentGreetingSignal",
+  "semanticEdgeId": "resolve-student-greeting",
+  "provenance": {
+    "requestHash": "sha256:0545b80819ef31fc1ab567cf3e1f8d43fe8de2fbb1d1ca28901932e658eb7a38",
+    "responseHash": "sha256:f02d7da2bc0231f9a4a59f4b133ae290a4924473ccfc669b2065a43da978fac5",
+    "invocationId": "invocation-dc389b1b-f595-4057-8f52-4890b6ce574e",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:167904f17c6c38533bad6da027c9f222942f866db80de2baab45f244b3e743fe",
+    "signature": "+zAdA2fMWwi+i7RccWvZuPHbWwE6LTwsARcP0XgCSdqd608MCeCFhr4UJkOdlPBAJo6ohve3n9V4Ixt1X787AA=="
+  }
+}

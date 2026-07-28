@@ -7,15 +7,19 @@
   "private": true,
   "main": "./src/index.ts",
   "bin": {
-    "llm-connector": "./bin/llm-connector.ts"
+    "llm-connector": "./bin/llm-connector.ts",
+    "authority-conveyor": "./bin/authority-conveyor.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test --test-reporter spec tests/acceptance/obtains-model-response.steps.test.ts tests/conformance/enforces-connector-conformance.test.ts tests/adapters/verifies-provider-adapter-contract.test.ts",
+    "test": "node --import tsx --test --test-reporter spec tests/acceptance/obtains-model-response.steps.test.ts tests/conformance/enforces-connector-conformance.test.ts tests/adapters/verifies-provider-adapter-contract.test.ts tests/conveyor/proves-projector-only-code-origin.test.ts",
     "test:acceptance": "node --import tsx --test --test-reporter spec tests/acceptance/obtains-model-response.steps.test.ts",
     "test:conformance": "node --import tsx --test --test-reporter spec tests/conformance/enforces-connector-conformance.test.ts",
     "test:adapters": "node --import tsx --test --test-reporter spec tests/adapters/verifies-provider-adapter-contract.test.ts",
-    "obtain": "node --import tsx ./bin/llm-connector.ts obtain"
+    "test:conveyor": "node --import tsx --test --test-reporter spec tests/conveyor/proves-projector-only-code-origin.test.ts",
+    "obtain": "node --import tsx ./bin/llm-connector.ts obtain",
+    "conveyor:demo": "node --import tsx ./bin/authority-conveyor.ts --intent ./demonstrations/projects-greeting-capability.intent.json --provider-authority ./config/provider-authority.json --output-root ./generated/conveyor-demo",
+    "conveyor:resume": "node --import tsx ./bin/authority-conveyor.ts --intent ./demonstrations/projects-greeting-capability.intent.json --provider-authority ./config/provider-authority.json --output-root ./generated/conveyor-demo --resume"
   },
   "devDependencies": {
     "@types/node": "^20.19.0",
