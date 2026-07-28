@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "fafce23e9a217445d433",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/runs-feature-scenario-atomicity-validation.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/runs-feature-scenario-atomicity-validation.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:26d32399e4738cdd56375b138a69b059c624f992892687e8691d310411a575f7",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-runs-feature-scenario-atomicity-validation",
+  "posture": "executable",
+  "semanticRole": "Executable course body responsible for running feature scenario atomicity validation.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:c42d5e964e1379b53c4e2df3174101cd21f1ef9e5ed274d437321c648cadf067",
+    "responseHash": "sha256:da947aa5a10faf34b499316b2ff448316a0f7c660887ec710a0e2bca00cb7b11",
+    "invocationId": "invocation-a41568bf-972d-4667-8e7c-3e49e0764548",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:68dec063f9915795a4efaa45177b562e21a693af2bcaad322264d9d4063241e2",
+    "signature": "YP9kFcsOsaYHKnGf3OPvC10pIuAjRUJ2X3q3zd85a3YrOuv9yJRVbVhcSmVtywXmPbBzacp9ATwBTEe+KhcgDw=="
+  }
+}

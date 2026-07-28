@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "b9a1ab169ab5636bf084",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-a-scenario-with-multiple-obligations/evaluates-scenario-atomicity/evaluates-scenario-atomicity.test.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-a-scenario-with-multiple-obligations/evaluates-scenario-atomicity/evaluates-scenario-atomicity.test.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:433e6f839cf7e97c9c8fc5fb7973174a69dd1de091d4a9ae96574f19df5f8af3",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-scenarios-reject-a-scenario-with-multiple-obligations-evaluates-scenario-atomicity-evaluates-scenario-atomicity-test",
+  "posture": "test",
+  "semanticRole": "Executes test assertions to evaluate scenario atomicity by ensuring scenarios with multiple obligations are rejected.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:526344715e21dfc2f23cca694c2c8deab0a0343458a4eaf1f48ed1b041f8421c",
+    "responseHash": "sha256:dad6bbd7806e20f2e189c7af1ed09c1a031a215334d5819b08d55fad5e0b9543",
+    "invocationId": "invocation-3d8353b3-4ab4-4c4b-b627-5a3590ce3dd4",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:c40201ad7969dba02dc0de3a19cb4c1215607f21521cb8c30dd62790fe2d2309",
+    "signature": "jiX83bykk04G3cWiEx0or1aA0Othu9YGhtOqVabl5tIFapoSfRWPXgyHSaYcliGZOj8VRoca15k9GWKWr+GoBg=="
+  }
+}

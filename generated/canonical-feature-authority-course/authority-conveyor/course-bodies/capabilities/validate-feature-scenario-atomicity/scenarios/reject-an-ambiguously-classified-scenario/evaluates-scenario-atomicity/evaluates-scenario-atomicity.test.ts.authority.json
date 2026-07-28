@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "774c0436b9d292dab5c7",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-an-ambiguously-classified-scenario/evaluates-scenario-atomicity/evaluates-scenario-atomicity.test.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-an-ambiguously-classified-scenario/evaluates-scenario-atomicity/evaluates-scenario-atomicity.test.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:0c633687c6eed61ce2a14a4219b5fed7ac30011abe5c7cde8b977a7cbe573730",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-scenarios-reject-an-ambiguously-classified-scenario-evaluates-scenario-atomicity-evaluates-scenario-atomicity-test",
+  "posture": "test",
+  "semanticRole": "Tests whether scenario atomicity is properly evaluated when rejecting an ambiguously classified scenario.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:1409430b088bb622c02559436f0029ecf690de4a4ecc663dea2b72a9307ae6e4",
+    "responseHash": "sha256:afde057bdebb1e43881bcf4bcb50ab338be3fe7935856691a3d1cb443f9590b3",
+    "invocationId": "invocation-6ba83f14-64b7-4972-aec0-69131afb8cff",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:00c682114bdd1319c67037b1d9590f05abd33d9952c16ae3bb5ee34e78918a26",
+    "signature": "Z9OWo3MQi2nSF5QF116rBe7yHk8nENcGquIQK4eyu1DepFPzXYD8//lC9qixab5N2YgQ9vGXzRAdrds+uVtDBQ=="
+  }
+}

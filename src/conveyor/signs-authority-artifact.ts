@@ -93,29 +93,50 @@ export async function signsAuthorityArtifact(
 }
 
 export function verifiesAuthorityArtifact(
-  artifact: AcceptedAuthorityArtifact,
+  artifact: unknown,
   trust: ConveyorTrustAuthority
 ): boolean {
-  const { attestation, ...unsigned } = artifact;
+  if (typeof artifact !== "object" || artifact === null) return false;
+  const candidate = artifact as Record<string, unknown>;
+  const rawAttestation = candidate["attestation"];
+  if (typeof rawAttestation !== "object" || rawAttestation === null) {
+    return false;
+  }
+  const attestation = rawAttestation as Record<string, unknown>;
   if (
-    attestation.keyId !== trust.keyId ||
-    attestation.signerId !== trust.signerId ||
-    attestation.artifactHash !== sha256(canonicalJson(unsigned))
+    attestation["version"] !== "authority-artifact-attestation.v1" ||
+    attestation["algorithm"] !== "ed25519" ||
+    typeof attestation["keyId"] !== "string" ||
+    typeof attestation["signerId"] !== "string" ||
+    typeof attestation["artifactHash"] !== "string" ||
+    typeof attestation["signature"] !== "string"
+  ) {
+    return false;
+  }
+  const { attestation: _attestation, ...unsigned } = candidate;
+  if (
+    attestation["keyId"] !== trust.keyId ||
+    attestation["signerId"] !== trust.signerId ||
+    attestation["artifactHash"] !== sha256(canonicalJson(unsigned))
   ) {
     return false;
   }
   const payload = canonicalJson({
-    version: attestation.version,
-    signerId: attestation.signerId,
-    keyId: attestation.keyId,
-    artifactHash: attestation.artifactHash
+    version: attestation["version"],
+    signerId: attestation["signerId"],
+    keyId: attestation["keyId"],
+    artifactHash: attestation["artifactHash"]
   });
-  return verify(
-    null,
-    Buffer.from(payload),
-    createPublicKey(trust.publicKeyPem),
-    Buffer.from(attestation.signature, "base64")
-  );
+  try {
+    return verify(
+      null,
+      Buffer.from(payload),
+      createPublicKey(trust.publicKeyPem),
+      Buffer.from(attestation["signature"], "base64")
+    );
+  } catch {
+    return false;
+  }
 }
 
 export async function signsMarkdownProjection(

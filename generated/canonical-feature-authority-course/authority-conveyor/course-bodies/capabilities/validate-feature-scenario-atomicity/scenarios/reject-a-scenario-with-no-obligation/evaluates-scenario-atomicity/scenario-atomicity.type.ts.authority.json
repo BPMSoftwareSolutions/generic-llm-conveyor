@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "90b57dce5b0dd9b8b5a1",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-a-scenario-with-no-obligation/evaluates-scenario-atomicity/scenario-atomicity.type.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/scenarios/reject-a-scenario-with-no-obligation/evaluates-scenario-atomicity/scenario-atomicity.type.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:a6b81d5906345e146a286eae84ea3f4bb8a84e401100680f3b9a9573b6ec06cf",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-scenarios-reject-a-scenario-with-no-obligation-evaluates-scenario-atomicity-scenario-atomicity-type",
+  "posture": "type-contract",
+  "semanticRole": "Defines the type contract for evaluating scenario atomicity when rejecting a scenario with no obligation.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:2a65fda915a26ed10faca57b8e0f6cb7615bfc69b22e543d92808cb9a6b005b2",
+    "responseHash": "sha256:971b5a9be4d7aa27dfffe621463e25090fecb2242d43ace1631b2956a344a5ed",
+    "invocationId": "invocation-2f9a475f-92fe-488b-ba80-bce3da45f3b7",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:043a8203b8d7c8bde0981007bf8fbef09ab943466f896cc67c742c534b127096",
+    "signature": "7l5O+wady6emQLjK7eSy4PXn3R1IvSZcQ8I9o1xHuK8qHWnivOeGmCqzYFRdnf4EjqGqJcqpuSXN22zVaDW2Dw=="
+  }
+}

@@ -116,7 +116,12 @@ export async function runsAuthorityConveyor(
         }
       }
     }
-    const request = createsLaneRequest(intent, laneId, accepted);
+    const request = createsLaneRequest(
+      intent,
+      laneId,
+      accepted,
+      dependencies.providerAuthority.providerAuthorityId
+    );
     const response = await obtainsModelResponse(request, dependencies.connector);
     if (
       response.disposition !== "MODEL_RESPONSE_OBTAINED" ||
@@ -196,12 +201,13 @@ export async function runsAuthorityConveyor(
 function createsLaneRequest(
   intent: ConveyorIntent,
   laneId: ConveyorLaneId,
-  accepted: readonly AcceptedAuthorityArtifact[]
+  accepted: readonly AcceptedAuthorityArtifact[],
+  providerAuthorityId: string
 ): ModelRequest {
   const schema = laneSchema(laneId);
   return {
     requestId: `${intent.intentId}-${laneId}`,
-    providerAuthorityId: "primary-cognitive-provider",
+    providerAuthorityId,
     modelAlias: "instruction-capable-model",
     interaction: {
       mode: "structured-generation",

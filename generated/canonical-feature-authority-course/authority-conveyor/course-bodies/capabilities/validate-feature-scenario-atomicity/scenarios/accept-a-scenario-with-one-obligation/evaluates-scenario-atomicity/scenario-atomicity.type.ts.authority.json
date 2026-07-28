@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "524db0b3662dcd6f150c",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/scenarios/accept-a-scenario-with-one-obligation/evaluates-scenario-atomicity/scenario-atomicity.type.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/scenarios/accept-a-scenario-with-one-obligation/evaluates-scenario-atomicity/scenario-atomicity.type.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:0e1eba0e1a502fddd1b107a129b059f422e657c8077a6156aed9d55759c6d861",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-scenarios-accept-a-scenario-with-one-obligation-evaluates-scenario-atomicity-scenario-atomicity-type",
+  "posture": "type-contract",
+  "semanticRole": "Defines the type contract for evaluating scenario atomicity when validating a feature scenario with one obligation.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:a72388301a865dd8997627de5e0500661fd510303d40371dd00bd26339f11f86",
+    "responseHash": "sha256:cc7aa9b79f88a3add3a65d9e0215955ba61df696ffd5bb7e3ced87617d82e758",
+    "invocationId": "invocation-f7aa3c09-19ca-4fd1-9508-c303ffd1bee7",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:d137bddd9ee097c67abaa5450f8699dfb9d537a796dad35b884474f56d390398",
+    "signature": "9CRP+6Jc4sTWkxgniyO+8sjsY1VNIQ/QnDYDA0jLhy0HDdPtmxyStGU2JktJbkmFzoKpkc1LDwAMAjmcjiQWDA=="
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "artifactType": "course-body-authority",
+  "bodyId": "39346a241886188a6245",
+  "relativePath": "capabilities/validate-feature-scenario-atomicity/scenarios/accept-a-scenario-with-one-obligation/evaluates-scenario-atomicity/runs-projection-conformance.ts",
+  "astAuthorityPath": "capabilities/validate-feature-scenario-atomicity/scenarios/accept-a-scenario-with-one-obligation/evaluates-scenario-atomicity/runs-projection-conformance.ts.ast.authority.json",
+  "astAuthoritySha256": "sha256:527d6b29f8dc62a3ea31ef857a3f9010b685e071193b913999db620612f40f7b",
+  "projectionId": "project-capabilities-validate-feature-scenario-atomicity-scenarios-accept-a-scenario-with-one-obligation-evaluates-scenario-atomicity-runs-projection-conformance",
+  "posture": "executable",
+  "semanticRole": "Executable test body that runs projection conformance to evaluate feature scenario atomicity for a scenario with one obligation.",
+  "disposition": "ADMIT_FOR_DETERMINISTIC_PROJECTION",
+  "projectionOwner": "declarative-typescript-body-projector",
+  "modelMayEmitCode": false,
+  "provenance": {
+    "requestHash": "sha256:d0b08d48e32e3e92e9f58baa3fa3890d5d1bf8ce3324bbbfd88fb01b02e5f07c",
+    "responseHash": "sha256:5d02c3cf32d4fb95fa0e20685d1bad10c0e84213985e0ee06ee4bc79757c650c",
+    "invocationId": "invocation-7d31af29-4e29-4b88-a629-7cf86b376f1b",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "resolvedModel": "gemini-flash-latest"
+  },
+  "attestation": {
+    "version": "authority-artifact-attestation.v1",
+    "signerId": "canonical-authority-conveyor",
+    "keyId": "sha256:2af46a27cff12b8464f89800fc1b1869d87a09479445b19e04010b79cc27500f",
+    "algorithm": "ed25519",
+    "artifactHash": "sha256:d099b1dec04d880ca0be6a6276d0ed7821c68922bacebea4f52be1b6c34d8b3a",
+    "signature": "LFWpon65WowoMMIl8C/BWDDnOBKRGTheXll+IeQZeFjFk/dX09ODDqZKjB3LyX/lbbVUgbEaI49RT3mS1A7RDA=="
+  }
+}
