@@ -113,9 +113,10 @@ function extractsStructuredValue(
 /**
  * Structural check against the declared schema.
  *
- * Supports the subset of JSON Schema needed to prove format satisfaction:
- * type, required, and properties. Deeper contract validation belongs to the
- * consuming capability, not to the connector.
+ * Supports the closed structural constraints carried to provider structured
+ * generation. Deeper domain-contract validation belongs to the consuming
+ * capability, but the connector may not report format satisfaction after a
+ * declared response constraint has already failed.
  */
 function violatesDeclaredSchema(
   value: unknown,
@@ -134,6 +135,14 @@ function checksAgainstSchema(
   pointer: string
 ): string | undefined {
   const declaredType = schema.type;
+
+  if ("const" in schema && JSON.stringify(value) !== JSON.stringify(schema.const)) {
+    return `Value at "${pointer}" does not satisfy the declared const.`;
+  }
+
+  if (Array.isArray(schema.enum) && !schema.enum.some((item) => JSON.stringify(item) === JSON.stringify(value))) {
+    return `Value at "${pointer}" is not one of the declared enum values.`;
+  }
 
   if (typeof declaredType === "string") {
     if (!matchesJsonType(value, declaredType)) {
@@ -156,6 +165,13 @@ function checksAgainstSchema(
 
     const properties = isRecord(schema.properties) ? schema.properties : {};
 
+    if (schema.additionalProperties === false) {
+      const undeclared = Object.keys(value).find((key) => !(key in properties));
+      if (undeclared !== undefined) {
+        return `Undeclared property "${undeclared}" is present at "${pointer}".`;
+      }
+    }
+
     for (const [key, propertySchema] of Object.entries(properties)) {
       if (!(key in value) || !isRecord(propertySchema)) {
         continue;
@@ -170,6 +186,24 @@ function checksAgainstSchema(
       if (nested !== undefined) {
         return nested;
       }
+    }
+  }
+
+  if (declaredType === "string" && typeof value === "string") {
+    if (typeof schema.minLength === "number" && value.length < schema.minLength) {
+      return `Value at "${pointer}" is shorter than declared minLength ${schema.minLength}.`;
+    }
+    if (typeof schema.pattern === "string" && !new RegExp(schema.pattern, "u").test(value)) {
+      return `Value at "${pointer}" does not satisfy declared pattern "${schema.pattern}".`;
+    }
+  }
+
+  if (declaredType === "array" && Array.isArray(value)) {
+    if (typeof schema.minItems === "number" && value.length < schema.minItems) {
+      return `Value at "${pointer}" contains fewer than declared minItems ${schema.minItems}.`;
+    }
+    if (typeof schema.maxItems === "number" && value.length > schema.maxItems) {
+      return `Value at "${pointer}" contains more than declared maxItems ${schema.maxItems}.`;
     }
   }
 

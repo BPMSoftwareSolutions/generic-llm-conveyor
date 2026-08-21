@@ -312,6 +312,42 @@ describe("Scenario: Reject a response that violates the required format", () => 
     assert.match(response.findings?.[0]?.detail ?? "", /confidence/);
   });
 
+  it("rejects structured output that violates declared closed identity constraints", async () => {
+    const request = buildsValidRequest({
+      interaction: {
+        mode: "structured-generation",
+        messages: [{ role: "user", content: "Resolve one canonical scenario input." }],
+      },
+      responsePolicy: {
+        format: "json",
+        maximumOutputTokens: 512,
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["inputId", "contractId", "semanticFacts"],
+          properties: {
+            inputId: { type: "string", pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+            contractId: { type: "string", pattern: "^[a-z0-9][a-z0-9.-]*\\.v[0-9]+$" },
+            semanticFacts: { type: "array", minItems: 1, items: { type: "string", minLength: 1 } },
+          },
+        },
+      },
+    });
+    const adapter = createsRecordingAdapter("invokes-gemini-model", "gemini", [{
+      disposition: "provider-responded",
+      structuredValue: {
+        inputId: "valid-input",
+        contractId: "missing-version",
+        semanticFacts: ["One fact exists."],
+      },
+    }]);
+
+    const response = await obtainsModelResponse(request, buildsDependencies([adapter]));
+
+    assert.equal(response.disposition, "RESPONSE_FORMAT_NOT_SATISFIED");
+    assert.match(response.findings?.[0]?.detail ?? "", /contractId.*pattern/);
+  });
+
   it("accepts structured output that satisfies the declared schema", async () => {
     const request = buildsValidRequest({
       interaction: {
