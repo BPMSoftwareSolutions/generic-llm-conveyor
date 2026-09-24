@@ -85,11 +85,7 @@
           "required": ["allowed"],
           "additionalProperties": false,
           "properties": {
-            "allowed": { "type": "boolean" },
-            "continueWhen": {
-              "type": "array",
-              "items": { "type": "string" }
-            }
+            "allowed": { "const": false }
           }
         }
       }

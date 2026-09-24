@@ -257,6 +257,12 @@ function validatesExecutionPolicy(
         "The execution policy must declare whether provider substitution is allowed.",
       pointer: "/executionPolicy/providerSubstitution/allowed",
     });
+  } else if (substitution.allowed) {
+    findings.push({
+      code: "PROVIDER_SUBSTITUTION_NOT_SUPPORTED",
+      detail: "Provider substitution is not supported; allowed must be false.",
+      pointer: "/executionPolicy/providerSubstitution/allowed",
+    });
   }
 }
 

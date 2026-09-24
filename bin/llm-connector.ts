@@ -1,19 +1,9 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { createsGeminiAdapter, fetchHttpPort } from "../providers/gemini/invokes-gemini-model.js";
 import { obtainsModelResponse } from "../src/obtains-model-response/obtains-model-response.js";
-import {
-  DISPOSITION_EXIT_CODES,
-  type ModelConnectorDependencies,
-  type ProviderAuthority,
-} from "../src/shared/model-connector-contract.js";
-import {
-  environmentCredentials,
-  sha256Hashes,
-  systemClock,
-  uuidIdentity,
-} from "../src/shared/runtime-ports.js";
+import { DISPOSITION_EXIT_CODES } from "../src/shared/model-connector-contract.js";
+import { createsRuntimeDependencies, loadsProviderAuthorities } from "../src/shared/creates-runtime.js";
 
 /**
  * CLI front door.
@@ -65,13 +55,11 @@ async function main(argv: readonly string[]): Promise<number> {
   }
 
   let request: unknown;
-  let providerAuthorities: readonly ProviderAuthority[];
+  let providerAuthorities;
 
   try {
     request = await readsJsonFile(options.requestPath);
-    providerAuthorities = normalizesAuthorities(
-      await readsJsonFile(options.providerAuthorityPath)
-    );
+    providerAuthorities = await loadsProviderAuthorities(options.providerAuthorityPath);
   } catch (error) {
     emitsProgress({
       event: "cli-input-unreadable",
@@ -80,19 +68,7 @@ async function main(argv: readonly string[]): Promise<number> {
     return DISPOSITION_EXIT_CODES.MODEL_REQUEST_REJECTED;
   }
 
-  const dependencies: ModelConnectorDependencies = {
-    providerAuthorities,
-    providerAdapters: [
-      createsGeminiAdapter({
-        http: fetchHttpPort,
-        credentials: environmentCredentials,
-        clock: systemClock,
-      }),
-    ],
-    clock: systemClock,
-    hashes: sha256Hashes,
-    identity: uuidIdentity,
-  };
+  const dependencies = createsRuntimeDependencies(providerAuthorities);
 
   emitsProgress({
     event: "obtain-model-response-started",
@@ -160,24 +136,6 @@ async function readsJsonFile(path: string): Promise<unknown> {
       }`
     );
   }
-}
-
-/** A provider authority file may declare one authority or a list of them. */
-function normalizesAuthorities(loaded: unknown): readonly ProviderAuthority[] {
-  if (Array.isArray(loaded)) {
-    return loaded as ProviderAuthority[];
-  }
-
-  if (
-    typeof loaded === "object" &&
-    loaded !== null &&
-    Array.isArray((loaded as { providerAuthorities?: unknown }).providerAuthorities)
-  ) {
-    return (loaded as { providerAuthorities: ProviderAuthority[] })
-      .providerAuthorities;
-  }
-
-  return [loaded as ProviderAuthority];
 }
 
 function emitsProgress(record: Record<string, unknown>): void {

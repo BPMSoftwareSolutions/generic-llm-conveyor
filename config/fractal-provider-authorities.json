@@ -1,0 +1,40 @@
+{
+  "providerAuthorities": [
+    {
+      "providerAuthorityId": "gemini-live",
+      "providerKind": "gemini",
+      "adapterId": "invokes-gemini-model",
+      "credentialReference": { "source": "environment", "name": "LOC_GEMINI_API_KEY" },
+      "endpointAuthority": { "mode": "provider-default" },
+      "modelAliases": {
+        "instruction-capable-model": {
+          "resolvedModel": "gemini-flash-latest",
+          "supportedInteractionModes": ["text-generation", "structured-generation"]
+        }
+      },
+      "capabilities": {
+        "supportsUsageReporting": true,
+        "supportsStructuredOutput": true,
+        "supportsStreaming": false
+      }
+    },
+    {
+      "providerAuthorityId": "openai-live",
+      "providerKind": "openai",
+      "adapterId": "invokes-openai-model",
+      "credentialReference": { "source": "environment", "name": "OPENAI_API_KEY" },
+      "endpointAuthority": { "mode": "provider-default" },
+      "modelAliases": {
+        "instruction-capable-model": {
+          "resolvedModel": "gpt-5.4-mini",
+          "supportedInteractionModes": ["text-generation", "structured-generation"]
+        }
+      },
+      "capabilities": {
+        "supportsUsageReporting": true,
+        "supportsStructuredOutput": true,
+        "supportsStreaming": false
+      }
+    }
+  ]
+}

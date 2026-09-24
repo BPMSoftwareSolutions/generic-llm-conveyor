@@ -39,6 +39,9 @@ export {
   GEMINI_ADAPTER_ID,
   type HttpPort,
 } from "../providers/gemini/invokes-gemini-model.js";
+export { createsOpenAiAdapter, OPENAI_ADAPTER_ID } from "../providers/openai/invokes-openai-model.js";
+export { createsRuntimeDependencies, loadsProviderAuthorities } from "./shared/creates-runtime.js";
+export { createsProviderServer, listensOn } from "./http/provider-server.js";
 
 export * from "./conveyor/conveyor-contract.js";
 export { runsAuthorityConveyor } from "./conveyor/runs-authority-conveyor.js";

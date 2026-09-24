@@ -1,0 +1,133 @@
+{
+  "contractVersion": 1,
+  "description": "Obtain a live model response under an explicit provider authority, model alias, execution policy, and evidence policy.",
+  "defaultInputShape": "model-request",
+  "defaultOutputShape": "model-response",
+  "sampleInputs": {
+    "model-request": {
+      "requestId": "circuit-sample-001",
+      "providerAuthorityId": "openai-live",
+      "modelAlias": "instruction-capable-model",
+      "interaction": {
+        "mode": "text-generation",
+        "messages": [
+          { "role": "system", "content": "Answer in one short sentence using only the supplied context." },
+          { "role": "user", "content": "In this simulation, a circuit contract declares JSON input and output shapes plus port compatibility. What does it validate?" }
+        ]
+      },
+      "responsePolicy": { "format": "text", "maximumOutputTokens": 128 },
+      "executionPolicy": {
+        "timeoutMilliseconds": 20000,
+        "attemptAuthority": { "maximumAuthorizedAttempts": 1 },
+        "providerSubstitution": { "allowed": false }
+      },
+      "evidencePolicy": {
+        "captureRequestHash": true,
+        "captureResponseHash": true,
+        "captureResolvedProvider": true,
+        "captureResolvedModel": true,
+        "captureTokenUsage": true,
+        "captureTiming": true
+      }
+    }
+  },
+  "shapes": {
+    "model-request": {
+      "requestId": "string",
+      "providerAuthorityId": "string",
+      "modelAlias": "string",
+      "interaction": {
+        "type": "object",
+        "fields": {
+          "mode": { "type": "string", "enum": ["text-generation", "structured-generation"] },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "fields": {
+                "role": { "type": "string", "enum": ["system", "user", "assistant"] },
+                "content": "string"
+              }
+            }
+          }
+        }
+      },
+      "responsePolicy": {
+        "type": "object",
+        "fields": {
+          "format": { "type": "string", "enum": ["text", "json"] },
+          "maximumOutputTokens": "integer",
+          "temperature": { "type": "number", "optional": true },
+          "schema": { "type": "object", "fields": {}, "optional": true }
+        }
+      },
+      "executionPolicy": {
+        "type": "object",
+        "fields": {
+          "timeoutMilliseconds": "integer",
+          "attemptAuthority": {
+            "type": "object",
+            "fields": {
+              "maximumAuthorizedAttempts": "integer",
+              "continuationRule": { "type": "string", "enum": ["continue-while-provider-reports-transient-failure"], "optional": true }
+            }
+          },
+          "providerSubstitution": { "type": "object", "fields": { "allowed": "boolean" } }
+        }
+      },
+      "evidencePolicy": {
+        "type": "object",
+        "fields": {
+          "captureRequestHash": "boolean",
+          "captureResponseHash": "boolean",
+          "captureResolvedProvider": "boolean",
+          "captureResolvedModel": "boolean",
+          "captureTokenUsage": "boolean",
+          "captureTiming": "boolean"
+        }
+      }
+    },
+    "model-response": {
+      "requestId": "string",
+      "disposition": { "type": "string", "enum": ["MODEL_RESPONSE_OBTAINED"] },
+      "result": {
+        "type": "object",
+        "fields": {
+          "format": { "type": "string", "enum": ["text", "json"] },
+          "text": { "type": "string", "optional": true },
+          "structuredValue": { "type": "object", "fields": {}, "optional": true },
+          "finishReason": { "type": "string", "optional": true }
+        }
+      },
+      "proof": {
+        "type": "object",
+        "fields": {
+          "attemptCount": "integer",
+          "startedAt": "datetime",
+          "completedAt": "datetime",
+          "durationMilliseconds": "number",
+          "requestHash": { "type": "string", "optional": true },
+          "responseHash": { "type": "string", "optional": true }
+        }
+      }
+    }
+  },
+  "components": [
+    {
+      "id": "obtain-model-response",
+      "label": "Obtain live model response",
+      "event": "model-response-obtained",
+      "inputShape": "model-request",
+      "outputShape": "model-response",
+      "mode": "real",
+      "latencyMs": 0,
+      "ports": {
+        "inputs": { "request": "model-request" },
+        "outputs": { "response": "model-response" }
+      },
+      "handlerId": "obtain-model-response"
+    }
+  ],
+  "integrations": [],
+  "fixtures": []
+}

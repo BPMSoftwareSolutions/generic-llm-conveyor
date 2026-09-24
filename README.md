@@ -85,6 +85,51 @@ stderr  → JSONL progress and execution testimony
 exit    → stable disposition code
 ```
 
+## Reusable live inference provider
+
+This repository owns the independent Fractal Lab provider service and
+[`fractal/catalog.json`](fractal/catalog.json). The catalog declares one real
+`obtain-model-response` component with a request input port and a normalized
+response output port. Fractal Lab imports the catalog and calls the service by
+HTTP; no model adapter or prompt logic is installed in the lab runtime.
+
+The sample authority file [`config/fractal-provider-authorities.json`](config/fractal-provider-authorities.json)
+declares Gemini and OpenAI. Set `LOC_GEMINI_API_KEY` and/or `OPENAI_API_KEY` in
+the provider process environment, then start the service:
+
+```powershell
+npm install
+npm run serve
+```
+
+It listens on `127.0.0.1:4175`. `LLM_PROVIDER_PORT` changes the local port;
+update the endpoint in the external provider registry to match. The server
+requires an explicit authority file. To use another authority file:
+
+```powershell
+node --import tsx ./bin/provider-server.ts --provider-authority C:\path\to\authorities.json
+```
+
+Other providers can call `POST /v1/model-responses` with the canonical
+[`model-request` contract](authority/model-request.schema.v1.json) and receive a
+canonical [`model-response`](authority/model-response.schema.v1.json). The
+Fractal handler calls `POST /invoke` with `{ "handlerId":
+"obtain-model-response", "input": <model-request> }`; success returns
+`{ "output": <model-response> }`. Non-success dispositions return a non-2xx
+status and the complete receipt, so a circuit run fails visibly. `GET /health`
+lists configured authority IDs without revealing credentials.
+
+Requests choose `providerAuthorityId` and `modelAlias` explicitly. The service
+never substitutes a provider or changes a model alias. A JSON response requires
+a declared schema and undergoes both provider-side and connector-side checks.
+The caller owns its prompt, domain validation, and interpretation of the
+result. Add another provider adapter here and register it in
+`src/shared/creates-runtime.ts` to support another model protocol.
+
+The service binds to loopback because it can spend credentials supplied in its
+environment. For use from another machine, place authenticated ingress in
+front of it and set that ingress URL as the Fractal registry endpoint.
+
 ## Library use
 
 The CLI and any library consumer enter through the same operation.
